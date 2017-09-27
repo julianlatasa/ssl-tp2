@@ -17,7 +17,7 @@ enum token {
 	OPER_MAS,
 	OPER_MENOS,
 	OPER_MULT,
-	OPER_DIVISION,
-	EOF,
+	OPER_DIV,
+	FDT,
   ERROR
 };
