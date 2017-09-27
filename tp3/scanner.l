@@ -1,13 +1,13 @@
-/*** Definiciones ***/ 
+/*** Definiciones ***/
 %{
 	#include <stdio.h>
 	#include <strings.h>
 	#include "tokens.h"
 %}
 
-/* Esto determina las opciones de flex */ 
-%option header-file="tp2scanner.h"
-%option outfile="tp2scanner.c"
+/* Esto determina las opciones de flex */
+%option header-file="tp3scanner.h"
+%option outfile="tp3scanner.c"
 %option yylineno
 
 /*** Definicion General de Reglas ***/
@@ -67,4 +67,4 @@ int main() {
 	return 0;
 }
 
-/*** Seccion de Codigo C ***/ 
+/*** Seccion de Codigo C ***/
