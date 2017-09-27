@@ -1,12 +1,14 @@
 /*** Definiciones ***/ 
 %{
 	#include <stdio.h>
+	#include <strings.h>
 	#include "tokens.h"
 %}
 
 /* Esto determina las opciones de flex */ 
-/* %option noyywrap */ 
-/* Que lea solo un archivo */  
+%option header-file="tp2scanner.h"
+%option outfile="tp2scanner.c"
+%option yylineno
 
 /*** Definicion General de Reglas ***/
 reservedword_programa "programa"
@@ -19,8 +21,8 @@ reservedword_escribir "escribir"
 letter [a-zA-Z0-9]
 number [0-9]
 asignmentsymbol ":=​"
-punctuationcharacter "(" | ")"​ | ";"​ | ","​ | "//"​
-operator "*" | "+"​ | "-" | "/"
+punctuationcharacter [\(\)\;\,\/]​
+operator [\*\+\-\/]
 
 /*** Reglas ***/
 %%
@@ -31,17 +33,19 @@ operator "*" | "+"​ | "-" | "/"
 {reservedword_definir}?     return RWORDDEFINIR;
 {reservedword_leer}?    	return RWORDLEER;
 {reservedword_escribir}?    return RWORDESCRIBIR;
-{letter}+{letter|number}*	return IDENT;
-{number}+ 	            	return CONST;
+{letter}+{letter|number}*	{yylval.str = strdup(yytext);
+							 return IDENT;}
+{number}+ 	            	{sscanf(yytext, "%d", &yylval.num);
+							 return CONST;}
 {asignmentsymbol}?      	return ASIGNSYM;
 {punctuationcharacter}? 	return PUNTCHAR;
 {operator}?             	return OPER;
 [ \t\n\r]	 				;
 <<EOF>>						return EOF;
-.							return ERROR;
+.							{nerrlex++; yyerror("Caracter no valido\n"); return ERROR};
 %%
 
-char *token_names[] = {"RWORD_PROGRAMA", "RWORD_VARIABLES", "RWORD_CODIGO", "RWORD_FIN", "RWORD_DEFINIR", "RWORD_LEER", "RWORD_ESCRIBIR", "IDENT", "CONST", "ASIGNSYM", "PUNTCHAR", "OPER", "ERROR"};
+char *token_names[] = {"RWORD_PROGRAMA", "RWORD_VARIABLES", "RWORD_CODIGO", "RWORD_FIN", "RWORD_DEFINIR", "RWORD_LEER", "RWORD_ESCRIBIR", "IDENT", "CONST", "ASIGNSYM", "PUNTCHAR", "OPER", "EOF", "ERROR"};
 int main() {
 	enum token t;
 	while ((t = yylex()) != EOF)
