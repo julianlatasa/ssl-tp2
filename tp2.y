@@ -22,16 +22,31 @@
 
 %% /*** Ruglas BNF ***/
 
-todo	: listado {if (nerrlex) YYABORT;} 
-listado : cte
-	| listado cte
-	;
-cte	: ID {printf("Token: %s\t\tValor texto: %s\n", token_names[0], $<str>1);}
-	| DECIMAL {printf("Token: %s\t\tValor entero: %d\n",
-			token_names[1], $DECIMAL);}
-	| REAL {printf("Token: %s\t\tValor real: %g\n", 
-			token_names[2], $REAL);}
-	;
+todo : RWORDPROGRAMA defvars defcodigo RWORDFIN
+defvars : RWORDVARIABLES definirvar
+definirvar: RWORDDEFINIR IDENT PUNTCHAR
+		  | RWORDDEFINIR IDENT PUNTCHAR definirvar
+defcodigo : RWORDCODIGO defsent
+defsent : sentencia PUNTCHAR 
+		| sentencia PUNTCHAR defsent
+sentencia : RWORDLEER PUNTCHAR listaident PUNTCHAR 
+          | RWORDESCRIBIR PUNTCHAR listaexp PUNTCHAR 
+		  | IDENT ASIGNSYM exp
+listaident : IDENT 
+		   | IDENT PUNTCHAR listaident
+listaexp : exp 
+         | exp PUNTCHAR listaexp
+exp : termino 
+    | exp OPER termino 
+termino : factor 
+		| termino OPER factor
+factor : operando 
+       | - operando 
+	   | PUNTCHAR exp PUNTCHAR 
+	   | - exp
+operando : IDENT 
+         | CONST
+
 %% /*** Codigo C ***/
 
 int nerrlex = 0;
