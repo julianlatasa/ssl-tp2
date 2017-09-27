@@ -7,7 +7,7 @@
 	void yyerror(const char *s);
 	extern int nerrlex;
 }
-%defines "tp2arser.h"
+%defines "tp2parser.h"
 %output "tp2parser.c"
 %union {
 	int    num;
