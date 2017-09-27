@@ -18,7 +18,7 @@ reservedword_fin "fin"
 reservedword_definir "definir"
 reservedword_leer "leer"
 reservedword_escribir "escribir"
-letter [a-zA-Z0-9]
+letter [a-zA-Z]
 number [0-9]
 asignmentsymbol ":=​"
 punctuationcharacter [\(\)\;\,\/]​
