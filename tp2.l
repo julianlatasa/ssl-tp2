@@ -26,23 +26,23 @@ operator [\*\+\-\/]
 
 /*** Reglas ***/
 %%
-{reservedword_programa}?    return RWORDPROGRAMA;
-{reservedword_variables}?   return RWORDVARIABLES;
-{reservedword_codigo}?    	return RWORDCODIGO;
-{reservedword_fin}?    		return RWORDFIN;
-{reservedword_definir}?     return RWORDDEFINIR;
-{reservedword_leer}?    	return RWORDLEER;
-{reservedword_escribir}?    return RWORDESCRIBIR;
-{letter}+{letter|number}*	{yylval.str = strdup(yytext);
-							 return IDENT;}
-{number}+ 	            	{sscanf(yytext, "%d", &yylval.num);
-							 return CONST;}
-{asignmentsymbol}?      	return ASIGNSYM;
-{punctuationcharacter}? 	return PUNTCHAR;
-{operator}?             	return OPER;
-[ \t\n\r]	 				;
-<<EOF>>						return EOF;
-.							{nerrlex++; yyerror("Caracter no valido\n"); return ERROR};
+{reservedword_programa}?    	return RWORDPROGRAMA;
+{reservedword_variables}?   	return RWORDVARIABLES;
+{reservedword_codigo}?    		return RWORDCODIGO;
+{reservedword_fin}?    			return RWORDFIN;
+{reservedword_definir}?     	return RWORDDEFINIR;
+{reservedword_leer}?    		return RWORDLEER;
+{reservedword_escribir}?   	 	return RWORDESCRIBIR;
+{letter}+({letter}|{number})*	{yylval.str = strdup(yytext);
+								return IDENT;}
+{number}+ 	            		{sscanf(yytext, "%d", &yylval.num);
+								return CONST;}
+{asignmentsymbol}?      		return ASIGNSYM;
+{punctuationcharacter}? 		return PUNTCHAR;
+{operator}?             		return OPER;
+[ \t\n\r]	 					;
+<<EOF>>							return EOF;
+.								{nerrlex++; yyerror("Caracter no valido\n"); return ERROR};
 %%
 
 char *token_names[] = {"RWORD_PROGRAMA", "RWORD_VARIABLES", "RWORD_CODIGO", "RWORD_FIN", "RWORD_DEFINIR", "RWORD_LEER", "RWORD_ESCRIBIR", "IDENT", "CONST", "ASIGNSYM", "PUNTCHAR", "OPER", "EOF", "ERROR"};
