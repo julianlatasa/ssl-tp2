@@ -1,28 +1,39 @@
-/*** Definition section ***/ 
-%{ /* C code to be copied verbatim */ 
-%} 
- 
-/* This tells flex to read only one input file */ 
-%option noyywrap 
+/*** Definiciones ***/ 
+%{
+	#include <stdio.h>
+	#include "tokens.h"
+%}
 
-%%     /*** Rules section ***/ 
+/* Esto determina las opciones de flex */ 
+/* %option noyywrap */ /* Que lea solo un archivo */  
 
-/* [0-9]+ matches a string of one or more digits */ 
-[0-9]+  { /* yytext is a string containing the matched text. */ 
-            printf("Es una constante entera: %s\n", yytext);    
-			return CONSTANTE;
-		} 
+/*** Definicion General de Reglas ***/
+reservedword "programa" | "variables" | "codigo" | "fin" | "definir" | "leer" | "escribir"
+identifier [a-zA-Z0-9] /* Ojo que aca un identificador arranca con 0-9 y esto no deberia de pasar */
+constant [0-9]
+asignmentsymbol \:\=​
+punctuationcharacter \( | \)​ | \;​ | \,​ | \/\/​
+operator \* | \+​ | \- | \/
 
-/* [0-9]+ matches a string of one or more digits */ 
-[a-zA-Z0-9]+  { /* yytext is a string containing the matched text. */ 
-				printf("Es una identificador: %s\n", yytext);    
-				return IDENTIFICADOR;
-			  } 
+/*** Reglas ***/
+%%
+{reservedword}?         return RWORD;
+{identifier}*			return IDENT;
+{constant}*             return CONST;
+{asignmentsymbol}*      return ASIGNSYM;
+{punctuationcharacter}* return PUNTCHAR;
+{operator}*             return OPER;
+\t|\n\|\r    			;
+<<EOF>>					return EOF;
+.						return ERROR;
+%%
 
-		
-.|\n    {   /* Ignore all other characters. */   
-			return ERROR;
-		} 
- 
-%% 
-/*** C Code section ***/ 
+char *token_names[] = {"RWORD", "IDENT", "CONST", "ASIGNSYM", "PUNTCHAR", "OPER", "ERROR"};
+int main() {
+	enum token t;
+	while ((t = yylex()) != EOF)
+		printf("Token: %s\t\tValor: %s\n", token_names[t], yytext);
+	return 0;
+}
+
+/*** Seccion de Codigo C ***/ 
