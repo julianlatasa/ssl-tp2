@@ -24,26 +24,28 @@
 
 todo : RWORDPROGRAMA defvars defcodigo RWORDFIN
 defvars : RWORDVARIABLES definirvar
-definirvar: RWORDDEFINIR IDENT PUNTCHAR
-		  | RWORDDEFINIR IDENT PUNTCHAR definirvar
+definirvar: RWORDDEFINIR IDENT PUNTCHAR_PUNTOCOMA
+		  | RWORDDEFINIR IDENT PUNTCHAR_PUNTOCOMA definirvar
 defcodigo : RWORDCODIGO defsent
-defsent : sentencia PUNTCHAR 
-		| sentencia PUNTCHAR defsent
-sentencia : RWORDLEER PUNTCHAR listaident PUNTCHAR 
-          | RWORDESCRIBIR PUNTCHAR listaexp PUNTCHAR 
+defsent : sentencia PUNTCHAR_PUNTOCOMA 
+		| sentencia PUNTCHAR_PUNTOCOMA defsent
+sentencia : RWORDLEER PUNTCHAR_PIZQ listaident PUNTCHAR_PDER 
+          | RWORDESCRIBIR PUNTCHAR_PIZQ listaexp PUNTCHAR_PDER
 		  | IDENT ASIGNSYM exp
 listaident : IDENT 
-		   | IDENT PUNTCHAR listaident
+		   | IDENT PUNTCHAR_COMA listaident
 listaexp : exp 
-         | exp PUNTCHAR listaexp
+         | exp PUNTCHAR_COMA listaexp
 exp : termino 
-    | exp OPER termino 
+    | exp OPER_SUMA termino 
+    | exp OPER_RESTA termino 
 termino : factor 
-		| termino OPER factor
+		| termino OPER_MULT factor
+		| termino OPER_DIV factor
 factor : operando 
-       | - operando 
-	   | PUNTCHAR exp PUNTCHAR 
-	   | - exp
+       | OPER_RESTA operando 
+	   | PUNTCHAR_PIZQ exp PUNTCHAR_PDER
+	   | OPER_RESTA exp
 operando : IDENT 
          | CONST
 

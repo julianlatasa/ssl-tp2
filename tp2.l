@@ -21,8 +21,15 @@ reservedword_escribir "escribir"
 letter [a-zA-Z]
 number [0-9]
 asignmentsymbol ":=​"
-punctuationcharacter [\(\)\;\,\/]​
-operator [\*\+\-\/]
+punctuationcharacter_pizq \(
+punctuationcharacter_pder \)​
+punctuationcharacter_puntocoma \;​
+punctuationcharacter_coma \,​
+punctuationcharacter_coment \/\/​
+operator_suma \+
+operator_resta \-
+operator_mult \*
+operator_div \/
 
 /*** Reglas ***/
 %%
@@ -38,8 +45,15 @@ operator [\*\+\-\/]
 {number}+ 	            		{sscanf(yytext, "%d", &yylval.num);
 								return CONST;}
 {asignmentsymbol}?      		return ASIGNSYM;
-{punctuationcharacter}? 		return PUNTCHAR;
-{operator}?             		return OPER;
+{punctuationcharacter_pizq}? 	return PUNTCHAR_PIZQ;
+{punctuationcharacter_pder}? 	return PUNTCHAR_PDER;
+{punctuationcharacter_puntocoma}? 	return PUNTCHAR_PUNTOCOMA;
+{punctuationcharacter_coma}? 	return PUNTCHAR_COMA;
+{punctuationcharacter_coment}? 	return PUNTCHAR_COMENT;
+{operator_suma}?             	return OPER_SUMA;
+{operator_resta}?             	return OPER_RESTA;
+{operator_mult}?             	return OPER_MULT;
+{operator_div}?             	return OPER_DIV;
 [ \t\n\r]	 					;
 <<EOF>>							return EOF;
 .								{nerrlex++; yyerror("Caracter no valido\n"); return ERROR};
