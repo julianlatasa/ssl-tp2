@@ -53,25 +53,18 @@ operator_div \/
 {reserved_word_definir}?     				return RWORD_DEFINIR;
 {reserved_word_leer}?    						return RWORD_LEER;
 {reserved_word_escribir}?   	 			return RWORD_ESCRIBIR;
-{letter}+({letter}|{number})*				{
-																				//yylval.str = strdup(yytext);
-																				return IDENT;
-																		}
-{number}+ 	            						{
-																				//sscanf(yytext, "%d", &yylval.num);
-																				return CONST;
-																		}
+{letter}+({letter}|{number})*				return IDENT;
+{number}+ 	            						return CONST;
 {asignment_symbol}?      						return ASIGNSYM;
-{punctuation_character_pizq}? 			return PUNTCHAR_PIZQ;
 {punctuation_character_pder}? 			return PUNTCHAR_PDER;
+{punctuation_character_pizq}? 			return PUNTCHAR_PIZQ;
 {punctuation_character_puntocoma}? 	return PUNTCHAR_PUNTOCOMA;
 {punctuation_character_coma}? 			return PUNTCHAR_COMA;
-{punctuation_character_coment}? 		return PUNTCHAR_COMENT;
 {operator_suma}?             				return OPER_MAS;
 {operator_resta}?             			return OPER_MENOS;
 {operator_mult}?             				return OPER_MULT;
 {operator_div}?             				return OPER_DIV;
-[\t\n\r]	 													;
+[ \t\n\r]	 													;
 <<EOF>>															return FDT;
 .																		{
 																				//nerrlex++;
