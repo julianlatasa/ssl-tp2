@@ -19,5 +19,7 @@ enum token {
 	OPER_MULT,
 	OPER_DIV,
 	FDT,
-  ERROR
+  ERROR_CONST,
+  ERROR_IDENT,
+  ERROR_DESC
 };

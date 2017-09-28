@@ -36,7 +36,8 @@ punctuation_character_pizq \(
 punctuation_character_pder \)
 punctuation_character_puntocoma ;
 punctuation_character_coma ,
-punctuation_character_coment  //
+punctuation_character_coment  "//"
+
 
 /* Operadores */
 operator_suma \+
@@ -44,34 +45,35 @@ operator_resta \-
 operator_mult \*
 operator_div \/
 
+caracter_invalido [^letter|number| \t\n\r;()/*-+,-]
+
 /*** Reglas ***/
 %%
-{operator_div}{operator_div}{letter}* 				;
-{reserved_word_programa}?						return RWORD_PROGRAMA;
-{reserved_word_variables}?   				return RWORD_VARIABLES;
-{reserved_word_codigo}?    					return RWORD_CODIGO;
-{reserved_word_fin}?    						return RWORD_FIN;
-{reserved_word_definir}?     				return RWORD_DEFINIR;
-{reserved_word_leer}?    						return RWORD_LEER;
-{reserved_word_escribir}?   	 			return RWORD_ESCRIBIR;
-{letter}+({letter}|{number})*				return IDENT;
-{number}+ 	            						return CONST;
-{asignment_symbol}      						return ASIGNSYM;
-{punctuation_character_pder}? 			return PUNTCHAR_PDER;
-{punctuation_character_pizq}? 			return PUNTCHAR_PIZQ;
-{punctuation_character_puntocoma}? 	return PUNTCHAR_PUNTOCOMA;
-{punctuation_character_coma}? 			return PUNTCHAR_COMA;
-{operator_suma}?             				return OPER_MAS;
-{operator_resta}?             			return OPER_MENOS;
-{operator_mult}?             				return OPER_MULT;
-{operator_div}?             				return OPER_DIV;
-[ \t\n\r]	 													;
-<<EOF>>															return FDT;
-.																		{
-																				//nerrlex++;
-																				//yyerror("Caracter no valido\n");
-																				return ERROR;
-																		};
+{reserved_word_programa}?											return RWORD_PROGRAMA;
+{reserved_word_variables}?   									return RWORD_VARIABLES;
+{reserved_word_codigo}?    										return RWORD_CODIGO;
+{reserved_word_fin}?    											return RWORD_FIN;
+{reserved_word_definir}?     									return RWORD_DEFINIR;
+{reserved_word_leer}?    											return RWORD_LEER;
+{reserved_word_escribir}?   	 								return RWORD_ESCRIBIR;
+{operator_resta}?             								return OPER_MENOS;
+{letter}+({letter}|{number})*									return IDENT;
+{letter}+{caracter_invalido}+									return ERROR_IDENT;
+{number}+ 	            											return CONST;
+{number}+{letter}															return ERROR_CONST;
+{asignment_symbol}      											return ASIGNSYM;
+{punctuation_character_pder}? 								return PUNTCHAR_PDER;
+{punctuation_character_pizq}? 								return PUNTCHAR_PIZQ;
+{punctuation_character_puntocoma}? 						return PUNTCHAR_PUNTOCOMA;
+{punctuation_character_coma}? 								return PUNTCHAR_COMA;
+{operator_suma}?             									return OPER_MAS;
+{operator_mult}?             									return OPER_MULT;
+{operator_div}?             									return OPER_DIV;
+[ \t\n\r]	 																		;
+punctuation_character_coment.* 								;
+<<EOF>>																				return FDT;
+{caracter_invalido}+													return ERROR_DESC;
+
 %%
 
 /*** Seccion de Codigo C ***/
@@ -98,13 +100,30 @@ char *token_names[] = {
 	"\'*\'", // Por
 	"\'/\'", // Dividir
 	"Fin de Archivo",
-	"ERROR"
+	"ERROR",
 };
 int main() {
 	enum token t;
 	while (t != FDT){
 		t = yylex();
-		printf("Token: %s\t\tLexema: %s\n", token_names[t], yytext);
+		if (t < 20){
+			printf("Token: %s\t\tLexema: %s\n", token_names[t], yytext);
+		} else {
+			switch(t){
+				case ERROR_CONST:
+					printf("Error léxico: constante con sufijo inválido: %s\n", yytext);
+					break;
+				case ERROR_IDENT:
+					printf("Error léxico: identificador inválido: %s\n", yytext);
+					break;
+				case ERROR_DESC:
+					printf("Error léxico: cadena desconocida: %s\n", yytext);
+					break;
+				default:
+					printf("Error desconocido.");
+					break;
+			}
+		}
 	}
 
 	return 0;
