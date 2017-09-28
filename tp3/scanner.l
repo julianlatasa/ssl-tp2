@@ -54,11 +54,11 @@ operator_div \/
 {reserved_word_leer}?    						return RWORD_LEER;
 {reserved_word_escribir}?   	 			return RWORD_ESCRIBIR;
 {letter}+({letter}|{number})*				{
-																				yylval.str = strdup(yytext);
+																				//yylval.str = strdup(yytext);
 																				return IDENT;
 																		}
 {number}+ 	            						{
-																				sscanf(yytext, "%d", &yylval.num);
+																				//sscanf(yytext, "%d", &yylval.num);
 																				return CONST;
 																		}
 {asignment_symbol}?      						return ASIGNSYM;
@@ -71,11 +71,11 @@ operator_div \/
 {operator_resta}?             			return OPER_MENOS;
 {operator_mult}?             				return OPER_MULT;
 {operator_div}?             				return OPER_DIV;
-[ \t\n\r]	 													;
+[\t\n\r]	 													;
 <<EOF>>															return FDT;
 .																		{
-																				nerrlex++;
-																				yyerror("Caracter no valido\n");
+																				//nerrlex++;
+																				//yyerror("Caracter no valido\n");
 																				return ERROR;
 																		};
 %%
@@ -83,10 +83,33 @@ operator_div \/
 /*** Seccion de Codigo C ***/
 /* TODO: hacerlo en main.c */
 
-char *token_names[] = {"RWORD_PROGRAMA", "RWORD_VARIABLES", "RWORD_CODIGO", "RWORD_FIN", "RWORD_DEFINIR", "RWORD_LEER", "RWORD_ESCRIBIR", "IDENT", "CONST", "ASIGNSYM", "PUNTCHAR", "OPER", "FDT", "ERROR"};
+char *token_names[] = {
+	"Programa",
+	"Variables",
+	"Código",
+	"Fin",
+	"Definir",
+	"Leer",
+	"Escribir",
+	"Identificador",
+	"Constante",
+	"Asignación",
+	"\'(\'", // Paréntesis izquierdo
+	"\')\'", // Paréntesis derecho
+	"\';\'", // Punto y coma
+	"\',\'", // Coma
+	"Comentario",
+	"\'+\'", // Más
+	"\'-\'", // Menos
+	"\'*\'", // Por
+	"\'/\'", // Dividir
+	"Fin de Archivo",
+	"ERROR"
+};
 int main() {
 	enum token t;
-	while ((t = yylex()) != FDT)
-		printf("Token: %s\t\tValor: %s\n", token_names[t], yytext);
+	while ((t = yylex()) != FDT){
+		printf("Token: %s\t\tLexema: %s\n", token_names[t], yytext);
+	}
 	return 0;
 }
