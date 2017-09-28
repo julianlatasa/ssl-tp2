@@ -29,14 +29,14 @@ letter [a-zA-Z]
 number [0-9]
 
 /* Símbolo de asignación */
-asignment_symbol ":=​"
+asignment_symbol :=
 
 /* Caracteres de puntuación */
 punctuation_character_pizq \(
-punctuation_character_pder \)​
-punctuation_character_puntocoma \;​
-punctuation_character_coma \,​
-punctuation_character_coment \/\/​
+punctuation_character_pder \)
+punctuation_character_puntocoma ;
+punctuation_character_coma ,
+punctuation_character_coment  //
 
 /* Operadores */
 operator_suma \+
@@ -46,6 +46,7 @@ operator_div \/
 
 /*** Reglas ***/
 %%
+{operator_div}{operator_div}{letter}* 				;
 {reserved_word_programa}?						return RWORD_PROGRAMA;
 {reserved_word_variables}?   				return RWORD_VARIABLES;
 {reserved_word_codigo}?    					return RWORD_CODIGO;
@@ -55,7 +56,7 @@ operator_div \/
 {reserved_word_escribir}?   	 			return RWORD_ESCRIBIR;
 {letter}+({letter}|{number})*				return IDENT;
 {number}+ 	            						return CONST;
-{asignment_symbol}?      						return ASIGNSYM;
+{asignment_symbol}      						return ASIGNSYM;
 {punctuation_character_pder}? 			return PUNTCHAR_PDER;
 {punctuation_character_pizq}? 			return PUNTCHAR_PIZQ;
 {punctuation_character_puntocoma}? 	return PUNTCHAR_PUNTOCOMA;
@@ -101,8 +102,10 @@ char *token_names[] = {
 };
 int main() {
 	enum token t;
-	while ((t = yylex()) != FDT){
+	while (t != FDT){
+		t = yylex();
 		printf("Token: %s\t\tLexema: %s\n", token_names[t], yytext);
 	}
+
 	return 0;
 }
