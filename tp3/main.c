@@ -40,7 +40,7 @@ char *token_names[] = {
 
 int main() {
   enum token t = -1;
-	while (t){
+  while (t){
     t = yylex();
     switch(t){
       case IDENT:
