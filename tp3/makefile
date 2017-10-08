@@ -8,4 +8,3 @@ scanner.c: scanner.l
 
 tp3: scanner.c main.c
 	$(CCompiler) -o scanner ./main.c ./src/scanner.c -I./src $(CompilerFlags)
-	rm ./src/scanner.h ./src/scanner.c
