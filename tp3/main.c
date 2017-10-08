@@ -17,29 +17,29 @@
 
 char *token_names[] = {
   "Fin de Archivo",
- 	"Programa",
- 	"Variables",
- 	"Código",
- 	"Fin",
- 	"Definir",
- 	"Leer",
- 	"Escribir",
- 	"Identificador",
- 	"Constante",
- 	"Asignación",
- 	"\'(\'", // Paréntesis izquierdo
- 	"\')\'", // Paréntesis derecho
- 	"\';\'", // Punto y coma
- 	"\',\'", // Coma
- 	"Comentario",
- 	"\'+\'", // Más
- 	"\'-\'", // Menos
- 	"\'*\'", // Por
- 	"\'/\'", // Dividir
+  "Programa",
+  "Variables",
+  "Código",
+  "Fin",
+  "Definir",
+  "Leer",
+  "Escribir",
+  "Identificador",
+  "Constante",
+  "Asignación",
+  "\'(\'", // Paréntesis izquierdo
+  "\')\'", // Paréntesis derecho
+  "\';\'", // Punto y coma
+  "\',\'", // Coma
+  "Comentario",
+  "\'+\'", // Más
+  "\'-\'", // Menos
+  "\'*\'", // Por
+  "\'/\'", // Dividir
 };
 
 int main() {
-	enum token t = -1;
+  enum token t = -1;
 	while (t){
     t = yylex();
     switch(t){
