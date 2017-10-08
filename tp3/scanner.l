@@ -47,7 +47,6 @@ escribir								    	 												return RWORD_ESCRIBIR;
 
 [[:space:]]+																					;
 "//".* 																								;
-<<EOF>>																								return FDT;
 
 {number}+{letter}																			printf("Error léxico: constante con sufijo inválido: %s\n", yytext);
 {letter}+({letter}|{number}|{caracter_invalido})*			printf("Error léxico: identificador inválido: %s\n", yytext);

@@ -16,6 +16,7 @@
 #include "tokens.h"
 
 char *token_names[] = {
+  "Fin de Archivo",
  	"Programa",
  	"Variables",
  	"Código",
@@ -35,12 +36,12 @@ char *token_names[] = {
  	"\'-\'", // Menos
  	"\'*\'", // Por
  	"\'/\'", // Dividir
- 	"Fin de Archivo"
 };
 
 int main() {
-	enum token t;
-	while ((t = yylex()) != FDT){
+	enum token t = -1;
+	while (t){
+    t = yylex();
     switch(t){
       case IDENT:
       case CONST:
@@ -51,5 +52,6 @@ int main() {
         break;
     }
 	}
+
 	return 0;
 }
