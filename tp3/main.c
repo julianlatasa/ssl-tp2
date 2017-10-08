@@ -12,8 +12,8 @@
 
 #include <stdio.h>
 #include <strings.h>
-#include "scanner.h"
-#include "tokens.h"
+#include "src/scanner.h"
+#include "src/tokens.h"
 
 char *token_names[] = {
   "Fin de Archivo",

@@ -6,8 +6,8 @@
 %}
 
 /* Esto determina las opciones de flex */
-%option header-file="scanner.h"
-%option outfile="scanner.c"
+%option header-file="src/scanner.h"
+%option outfile="src/scanner.c"
 %option yylineno
 %option noinput
 %option nounput
@@ -51,5 +51,6 @@ escribir								    	 												return RWORD_ESCRIBIR;
 {number}+{letter}																			printf("Error léxico: constante con sufijo inválido: %s\n", yytext);
 {letter}+({letter}|{number}|{caracter_invalido})*			printf("Error léxico: identificador inválido: %s\n", yytext);
 {caracter_invalido}+																	printf("Error léxico: cadena desconocida: %s\n", yytext);
+.																	printf("Error léxico: caracter desconocido: %s\n", yytext);
 
 %%
