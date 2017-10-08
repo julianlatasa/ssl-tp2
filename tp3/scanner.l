@@ -9,6 +9,8 @@
 %option header-file="scanner.h"
 %option outfile="scanner.c"
 %option yylineno
+%option noinput
+%option nounput
 
 
 /*** Definicion General de Reglas ***/
