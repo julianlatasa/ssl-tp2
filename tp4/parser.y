@@ -1,53 +1,63 @@
-/*** Definiciones ***/ 
+/*** Definiciones ***/
 %code top{
 	#include <stdio.h>
-	#include "tp2scanner.h"
+	#include "scanner.h"
+	#include "tokens.h"
 }
 %code provides {
 	void yyerror(const char *s);
 	extern int nerrlex;
 }
-%defines "tp2parser.h"
-%output "tp2parser.c"
+%defines "parser.h"
+%output "parser.c"
 %union {
 	int    num;
 	char   *str;
 }
-%token<str> IDENT
-%token<num> CONST
+%token<str> IDENTIFICADOR
+%token<num> CONSTANTE
 
 %code {
-	char *token_names[] = {"IDENT", "CONST"};
+	char *token_names[] = {"Identificador", "Constante"};
 }
 
-%% /*** Ruglas BNF ***/
+%% /*** Reglas BNF ***/
 
-todo : RWORDPROGRAMA defvars defcodigo RWORDFIN
-defvars : RWORDVARIABLES definirvar
-definirvar: RWORDDEFINIR IDENT PUNTCHAR_PUNTOCOMA
-		  | RWORDDEFINIR IDENT PUNTCHAR_PUNTOCOMA definirvar
-defcodigo : RWORDCODIGO defsent
-defsent : sentencia PUNTCHAR_PUNTOCOMA 
-		| sentencia PUNTCHAR_PUNTOCOMA defsent
-sentencia : RWORDLEER PUNTCHAR_PIZQ listaident PUNTCHAR_PDER 
-          | RWORDESCRIBIR PUNTCHAR_PIZQ listaexp PUNTCHAR_PDER
-		  | IDENT ASIGNSYM exp
-listaident : IDENT 
-		   | IDENT PUNTCHAR_COMA listaident
-listaexp : exp 
-         | exp PUNTCHAR_COMA listaexp
-exp : termino 
-    | exp OPER_SUMA termino 
-    | exp OPER_RESTA termino 
-termino : factor 
-		| termino OPER_MULT factor
-		| termino OPER_DIV factor
-factor : operando 
-       | OPER_RESTA operando 
-	   | PUNTCHAR_PIZQ exp PUNTCHAR_PDER
-	   | OPER_RESTA exp
-operando : IDENT 
-         | CONST
+programa : "programa" sector_definicion_variables codigo "fin"
+
+sector_definicion_variables : "variables" definicion_variables
+
+definicion_variables : "definir" IDENTIFICADOR";"
+			     | "definir" IDENTIFICADOR";" definicion_variables
+
+codigo : "codigo" conjunto_sentencias
+
+conjunto_sentencias : sentencia";"
+										| sentencia";" conjunto_sentencias
+
+sentencia : "leer("lista_identificadores")"
+	  | "escribir("lista_expresiones")"
+	  | IDENTIFICADOR ":=" expresion
+
+lista_identificadores : IDENTIFICADOR
+		      | IDENTIFICADOR"," lista_identificadores
+
+lista_expresiones : expresion
+		  | expresion"," lista_expresiones
+
+expresion : termino
+	  | expresion "+" termino
+	  | expresion "-" termino
+
+termino : factor
+	| termino "*" factor
+	| termino "/" factor
+
+factor: operando
+      |	"("expresion")"
+      | "-"expresion
+
+operando : IDENTIFICADOR | CONSTANTE
 
 %% /*** Codigo C ***/
 
@@ -69,4 +79,3 @@ void yyerror(const char *s){
 	printf("línea #%d: %s\n", yylineno, s);
 	return;
 }
-
