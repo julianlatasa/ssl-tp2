@@ -1,5 +1,4 @@
 enum token {
-  FDT,
   RWORD_PROGRAMA,
   RWORD_VARIABLES,
 	RWORD_CODIGO,
@@ -21,5 +20,6 @@ enum token {
 	OPER_DIV,
   ERROR_CONST,
   ERROR_IDENT,
-  ERROR_DESC
+  ERROR_DESC,
+  FDT
 };
