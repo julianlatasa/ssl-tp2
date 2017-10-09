@@ -955,22 +955,22 @@ YY_RULE_SETUP
 case 21:
 YY_RULE_SETUP
 #line 51 "scanner.l"
-{nerrlex++; yyerror("Error Lexico, Constante con sufico invalido");}
+{nerrlex++; yyerror("Error Lexico, Constante con sufijo invalido: ");}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 52 "scanner.l"
-{nerrlex++; yyerror("Error léxico: identificador inválido");}
+{nerrlex++; yyerror("Error léxico: identificador inválido: ");}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 53 "scanner.l"
-{nerrlex++; yyerror("Error léxico: cadena desconocida");}
+{nerrlex++; yyerror("Error léxico: cadena desconocida: ");}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 54 "scanner.l"
-{nerrlex++; yyerror("Error léxico: caracter desconocido");}
+{nerrlex++; yyerror("Error léxico: caracter desconocido: ");}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP

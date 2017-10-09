@@ -43,6 +43,7 @@
 }
 
 %% /*** Reglas BNF ***/
+todo	: programa { if (yynerrs || nerrlex) YYABORT;}
 
 programa : RWORD_PROGRAMA sector_definicion_variables codigo RWORD_FIN
 
@@ -50,8 +51,10 @@ sector_definicion_variables : RWORD_VARIABLES definicion_variables
 
 definicion_variables : RWORD_DEFINIR IDENTIFICADOR PUNTCHAR_PUNTOCOMA
 			     | RWORD_DEFINIR IDENTIFICADOR PUNTCHAR_PUNTOCOMA definicion_variables
+					 | error
 
 codigo : RWORD_CODIGO conjunto_sentencias
+			 | error
 
 conjunto_sentencias : sentencia PUNTCHAR_PUNTOCOMA
 										| sentencia PUNTCHAR_PUNTOCOMA conjunto_sentencias

@@ -48,9 +48,9 @@ escribir								    	 												return RWORD_ESCRIBIR;
 [[:space:]]+																					;
 "//".* 																								;
 
-{number}+{letter}																			{nerrlex++; yyerror("Error Lexico, Constante con sufico invalido");}
-{letter}+({letter}|{number}|{caracter_invalido})*			{nerrlex++; yyerror("Error léxico: identificador inválido");}
-{caracter_invalido}+																	{nerrlex++; yyerror("Error léxico: cadena desconocida");}
-.																											{nerrlex++; yyerror("Error léxico: caracter desconocido");}
+{number}+{letter}																			{nerrlex++; yyerror("Error Lexico, Constante con sufijo invalido: ");}
+{letter}+({letter}|{number}|{caracter_invalido})*			{nerrlex++; yyerror("Error léxico: identificador inválido: ");}
+{caracter_invalido}+																	{nerrlex++; yyerror("Error léxico: cadena desconocida: ");}
+.																											{nerrlex++; yyerror("Error léxico: caracter desconocido: ");}
 
 %%
