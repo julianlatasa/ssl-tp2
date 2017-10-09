@@ -47,7 +47,27 @@ extern int yydebug;
   {
     IDENTIFICADOR = 258,
     CONSTANTE = 259,
-    RWORD_PROGRAMA = 260
+    RWORD_PROGRAMA = 260,
+    RWORD_VARIABLES = 261,
+    RWORD_CODIGO = 262,
+    RWORD_FIN = 263,
+    RWORD_DEFINIR = 264,
+    RWORD_LEER = 265,
+    RWORD_ESCRIBIR = 266,
+    ASIGNSYM = 267,
+    PUNTCHAR_PIZQ = 268,
+    PUNTCHAR_PDER = 269,
+    PUNTCHAR_PUNTOCOMA = 270,
+    PUNTCHAR_COMA = 271,
+    PUNTCHAR_COMENT = 272,
+    OPER_MAS = 273,
+    OPER_MENOS = 274,
+    OPER_MULT = 275,
+    OPER_DIV = 276,
+    ERROR_CONST = 277,
+    ERROR_IDENT = 278,
+    ERROR_DESC = 279,
+    FDT = 280
   };
 #endif
 
@@ -56,12 +76,12 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 13 "parser.y" /* yacc.c:1909  */
+#line 12 "parser.y" /* yacc.c:1909  */
 
 	int    num;
 	char   *str;
 
-#line 65 "parser.h" /* yacc.c:1909  */
+#line 85 "parser.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -74,11 +94,11 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 /* "%code provides" blocks.  */
-#line 7 "parser.y" /* yacc.c:1909  */
+#line 6 "parser.y" /* yacc.c:1909  */
 
 	void yyerror(const char *s);
 	extern int nerrlex;
 
-#line 83 "parser.h" /* yacc.c:1909  */
+#line 103 "parser.h" /* yacc.c:1909  */
 
 #endif /* !YY_YY_PARSER_H_INCLUDED  */

@@ -327,7 +327,7 @@ extern int yylex (void);
 #undef YY_DECL
 #endif
 
-#line 57 "scanner.l"
+#line 56 "scanner.l"
 
 
 #line 334 "scanner.h"

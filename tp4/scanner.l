@@ -2,8 +2,7 @@
 %{
 	#include <stdio.h>
 	#include <strings.h>
-	#include "parser.h" 
-	#include "tokens.h"
+	#include "parser.h"
 %}
 
 /* Esto determina las opciones de flex */
@@ -43,8 +42,8 @@ escribir								    	 												return RWORD_ESCRIBIR;
 "*"							             													return OPER_MULT;
 "/"							              												return OPER_DIV;
 
-{letter}+({letter}|{number})*													return IDENT;
-{number}+ 	            															return CONST;
+{letter}+({letter}|{number})*													return IDENTIFICADOR;
+{number}+ 	            															return CONSTANTE;
 
 [[:space:]]+																					;
 "//".* 																								;

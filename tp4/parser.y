@@ -13,8 +13,8 @@
 	int    num;
 	char   *str;
 }
-%token<str> IDENT
-%token<num> CONST
+%token<str> IDENTIFICADOR
+%token<num> CONSTANTE
 %token RWORD_PROGRAMA
 %token RWORD_VARIABLES
 %token RWORD_CODIGO

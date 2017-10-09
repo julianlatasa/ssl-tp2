@@ -14,8 +14,6 @@
 #include <strings.h>
 #include "parser.h"
 #include "scanner.h"
-#include "tokens.h"
-
 
 int nerrlex = 0;
 int main() {

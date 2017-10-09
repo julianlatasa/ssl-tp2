@@ -559,15 +559,14 @@ char *yytext;
 #line 3 "scanner.l"
 	#include <stdio.h>
 	#include <strings.h>
-	#include "parser.h" 
-	#include "tokens.h"
+	#include "parser.h"
 /* Esto determina las opciones de flex */
 #define YY_NO_INPUT 1
 /*** Definicion General de Reglas ***/
 /* Letras */
 /* Números */
 /*** Reglas ***/
-#line 571 "scanner.c"
+#line 570 "scanner.c"
 
 #define INITIAL 0
 
@@ -783,9 +782,9 @@ YY_DECL
 		}
 
 	{
-#line 27 "scanner.l"
+#line 26 "scanner.l"
 
-#line 789 "scanner.c"
+#line 788 "scanner.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -854,131 +853,131 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 28 "scanner.l"
+#line 27 "scanner.l"
 return RWORD_PROGRAMA;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 29 "scanner.l"
+#line 28 "scanner.l"
 return RWORD_VARIABLES;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 30 "scanner.l"
+#line 29 "scanner.l"
 return RWORD_CODIGO;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 31 "scanner.l"
+#line 30 "scanner.l"
 return RWORD_FIN;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 32 "scanner.l"
+#line 31 "scanner.l"
 return RWORD_DEFINIR;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 33 "scanner.l"
+#line 32 "scanner.l"
 return RWORD_LEER;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 34 "scanner.l"
+#line 33 "scanner.l"
 return RWORD_ESCRIBIR;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 36 "scanner.l"
+#line 35 "scanner.l"
 return ASIGNSYM;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 37 "scanner.l"
+#line 36 "scanner.l"
 return PUNTCHAR_PDER;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 38 "scanner.l"
+#line 37 "scanner.l"
 return PUNTCHAR_PIZQ;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 39 "scanner.l"
+#line 38 "scanner.l"
 return PUNTCHAR_PUNTOCOMA;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 40 "scanner.l"
+#line 39 "scanner.l"
 return PUNTCHAR_COMA;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 41 "scanner.l"
+#line 40 "scanner.l"
 return OPER_MAS;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 42 "scanner.l"
+#line 41 "scanner.l"
 return OPER_MENOS;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 43 "scanner.l"
+#line 42 "scanner.l"
 return OPER_MULT;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 44 "scanner.l"
+#line 43 "scanner.l"
 return OPER_DIV;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 46 "scanner.l"
-return IDENT;
+#line 45 "scanner.l"
+return IDENTIFICADOR;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 47 "scanner.l"
-return CONST;
+#line 46 "scanner.l"
+return CONSTANTE;
 	YY_BREAK
 case 19:
 /* rule 19 can match eol */
 YY_RULE_SETUP
-#line 49 "scanner.l"
+#line 48 "scanner.l"
 ;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 50 "scanner.l"
+#line 49 "scanner.l"
 ;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 52 "scanner.l"
+#line 51 "scanner.l"
 {nerrlex++; yyerror("Error Lexico, Constante con sufico invalido");}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 53 "scanner.l"
+#line 52 "scanner.l"
 {nerrlex++; yyerror("Error léxico: identificador inválido");}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 54 "scanner.l"
+#line 53 "scanner.l"
 {nerrlex++; yyerror("Error léxico: cadena desconocida");}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 55 "scanner.l"
+#line 54 "scanner.l"
 {nerrlex++; yyerror("Error léxico: caracter desconocido");}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 57 "scanner.l"
+#line 56 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 982 "scanner.c"
+#line 981 "scanner.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1950,7 +1949,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 57 "scanner.l"
+#line 56 "scanner.l"
 
 
 
