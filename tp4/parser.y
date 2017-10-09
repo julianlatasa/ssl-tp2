@@ -16,6 +16,8 @@
 }
 %token<str> IDENTIFICADOR
 %token<num> CONSTANTE
+%token RWORD_PROGRAMA
+%define parse.error verbose
 
 %code {
 	char *token_names[] = {"Identificador", "Constante"};
@@ -23,7 +25,7 @@
 
 %% /*** Reglas BNF ***/
 
-programa : "programa" sector_definicion_variables codigo "fin"
+programa : RWORD_PROGRAMA sector_definicion_variables codigo "fin"
 
 sector_definicion_variables : "variables" definicion_variables
 

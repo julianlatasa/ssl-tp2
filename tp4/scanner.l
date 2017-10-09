@@ -2,6 +2,7 @@
 %{
 	#include <stdio.h>
 	#include <strings.h>
+	#include "parser.h" 
 	#include "tokens.h"
 %}
 
@@ -48,9 +49,9 @@ escribir								    	 												return RWORD_ESCRIBIR;
 [[:space:]]+																					;
 "//".* 																								;
 
-{number}+{letter}																			printf("Error léxico: constante con sufijo inválido: %s\n", yytext);
-{letter}+({letter}|{number}|{caracter_invalido})*			printf("Error léxico: identificador inválido: %s\n", yytext);
-{caracter_invalido}+																	printf("Error léxico: cadena desconocida: %s\n", yytext);
-.																											printf("Error léxico: caracter desconocido: %s\n", yytext);
+{number}+{letter}																			{nerrlex++; yyerror("Error Lexico, Constante con sufico invalido");}
+{letter}+({letter}|{number}|{caracter_invalido})*			{nerrlex++; yyerror("Error léxico: identificador inválido");}
+{caracter_invalido}+																	{nerrlex++; yyerror("Error léxico: cadena desconocida");}
+.																											{nerrlex++; yyerror("Error léxico: caracter desconocido");}
 
 %%
