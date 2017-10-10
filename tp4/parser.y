@@ -50,8 +50,8 @@ programa : RWORD_PROGRAMA sector_definicion_variables codigo RWORD_FIN
 
 sector_definicion_variables : RWORD_VARIABLES definicion_variables
 
-definicion_variables : RWORD_DEFINIR IDENTIFICADOR PUNTCHAR_PUNTOCOMA { printf("Definir variable: %s\n", yylval.str); }
-			     | RWORD_DEFINIR IDENTIFICADOR PUNTCHAR_PUNTOCOMA definicion_variables { printf("Definir variable: %s\n", yylval.str); }
+definicion_variables : RWORD_DEFINIR IDENTIFICADOR PUNTCHAR_PUNTOCOMA { printf("definir %s\n", yylval.str); }
+			     | RWORD_DEFINIR IDENTIFICADOR PUNTCHAR_PUNTOCOMA definicion_variables { printf("definir %s\n", yylval.str); }
 					 | error
 
 codigo : RWORD_CODIGO conjunto_sentencias
@@ -60,9 +60,9 @@ codigo : RWORD_CODIGO conjunto_sentencias
 conjunto_sentencias : sentencia PUNTCHAR_PUNTOCOMA
 										| sentencia PUNTCHAR_PUNTOCOMA conjunto_sentencias
 
-sentencia : RWORD_LEER PUNTCHAR_PIZQ lista_identificadores PUNTCHAR_PDER { printf("Leer\n"); }
-	  | RWORD_ESCRIBIR PUNTCHAR_PIZQ lista_expresiones PUNTCHAR_PDER { printf("Escribir\n"); }
-	  | IDENTIFICADOR ASIGNSYM expresion { printf("Asignacion\n"); }
+sentencia : RWORD_LEER PUNTCHAR_PIZQ lista_identificadores PUNTCHAR_PDER { printf("leer\n"); }
+	  | RWORD_ESCRIBIR PUNTCHAR_PIZQ lista_expresiones PUNTCHAR_PDER { printf("escribir\n"); }
+	  | IDENTIFICADOR ASIGNSYM expresion { printf("asignación\n"); }
 
 lista_identificadores : IDENTIFICADOR
 		      | IDENTIFICADOR PUNTCHAR_COMA lista_identificadores
@@ -70,16 +70,16 @@ lista_identificadores : IDENTIFICADOR
 lista_expresiones : expresion
 		  | expresion PUNTCHAR_COMA lista_expresiones
 expresion : termino
-	  | expresion OPER_MAS termino { printf("Sumar\n"); }
-	  | expresion OPER_MENOS termino { printf("Restar\n"); }
+	  | expresion OPER_MAS termino { printf("suma\n"); }
+	  | expresion OPER_MENOS termino { printf("resta\n"); }
 
 termino : factor
-	| termino OPER_MULT factor { printf("Mulltiplicar\n"); }
-	| termino OPER_DIV factor { printf("Dividir\n"); }
+	| termino OPER_MULT factor { printf("multiplicación\n"); }
+	| termino OPER_DIV factor { printf("división\n"); }
 
 factor: operando
-      |	PUNTCHAR_PIZQ expresion PUNTCHAR_PDER
-      | OPER_MENOS expresion { printf("Inversion\n"); }
+      |	PUNTCHAR_PIZQ expresion PUNTCHAR_PDER { printf("paréntesis\n"); }
+      | OPER_MENOS expresion { printf("inversión\n"); }
 
 operando : IDENTIFICADOR | CONSTANTE
 

@@ -19,17 +19,18 @@ int nerrlex = 0;
 int main() {
   switch(yyparse()){
     case 0:
-      puts("Compilacion Exitosa");
+      puts("Compilación terminada con éxito");
       break;
     case 1:
-      printf("Errores sintacticos: %d, errores semanticos: %d\n", yynerrs, nerrlex); 
-      puts("Error de Compilacion\n");
+      puts("Errores de compilación");
      break;
     case 2:
       puts("Memoria insuficiente");
       break;
   }
- 
+
+  printf("Errores sintácticos: %d - Errores léxicos: %d\n", yynerrs, nerrlex);
+
 }
 
 /* Informa la ocurrencia de un error. */

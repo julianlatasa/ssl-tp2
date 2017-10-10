@@ -1285,66 +1285,72 @@ yyreduce:
 
   case 5:
 #line 53 "parser.y" /* yacc.c:1646  */
-    { printf("Definir variable: %s\n", yylval.str); }
+    { printf("definir %s\n", yylval.str); }
 #line 1290 "parser.c" /* yacc.c:1646  */
     break;
 
   case 6:
 #line 54 "parser.y" /* yacc.c:1646  */
-    { printf("Definir variable: %s\n", yylval.str); }
+    { printf("definir %s\n", yylval.str); }
 #line 1296 "parser.c" /* yacc.c:1646  */
     break;
 
   case 12:
 #line 63 "parser.y" /* yacc.c:1646  */
-    { printf("Leer\n"); }
+    { printf("leer\n"); }
 #line 1302 "parser.c" /* yacc.c:1646  */
     break;
 
   case 13:
 #line 64 "parser.y" /* yacc.c:1646  */
-    { printf("Escribir\n"); }
+    { printf("escribir\n"); }
 #line 1308 "parser.c" /* yacc.c:1646  */
     break;
 
   case 14:
 #line 65 "parser.y" /* yacc.c:1646  */
-    { printf("Asignacion\n"); }
+    { printf("asignación\n"); }
 #line 1314 "parser.c" /* yacc.c:1646  */
     break;
 
   case 20:
 #line 73 "parser.y" /* yacc.c:1646  */
-    { printf("Sumar\n"); }
+    { printf("suma\n"); }
 #line 1320 "parser.c" /* yacc.c:1646  */
     break;
 
   case 21:
 #line 74 "parser.y" /* yacc.c:1646  */
-    { printf("Restar\n"); }
+    { printf("resta\n"); }
 #line 1326 "parser.c" /* yacc.c:1646  */
     break;
 
   case 23:
 #line 77 "parser.y" /* yacc.c:1646  */
-    { printf("Mulltiplicar\n"); }
+    { printf("multiplicación\n"); }
 #line 1332 "parser.c" /* yacc.c:1646  */
     break;
 
   case 24:
 #line 78 "parser.y" /* yacc.c:1646  */
-    { printf("Dividir\n"); }
+    { printf("división\n"); }
 #line 1338 "parser.c" /* yacc.c:1646  */
+    break;
+
+  case 26:
+#line 81 "parser.y" /* yacc.c:1646  */
+    { printf("paréntesis\n"); }
+#line 1344 "parser.c" /* yacc.c:1646  */
     break;
 
   case 27:
 #line 82 "parser.y" /* yacc.c:1646  */
-    { printf("Inversion\n"); }
-#line 1344 "parser.c" /* yacc.c:1646  */
+    { printf("inversión\n"); }
+#line 1350 "parser.c" /* yacc.c:1646  */
     break;
 
 
-#line 1348 "parser.c" /* yacc.c:1646  */
+#line 1354 "parser.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
