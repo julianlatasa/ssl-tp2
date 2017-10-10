@@ -136,7 +136,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 12 "parser.y" /* yacc.c:355  */
+#line 13 "parser.y" /* yacc.c:355  */
 
 	int    num;
 	char   *str;
@@ -158,20 +158,21 @@ int yyparse (void);
 
 	void yyerror(const char *s);
 	extern int nerrlex;
+	extern int yynerrs;
 
-#line 163 "parser.c" /* yacc.c:355  */
+#line 164 "parser.c" /* yacc.c:355  */
 
 #endif /* !YY_YY_PARSER_H_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
-#line 169 "parser.c" /* yacc.c:358  */
+#line 170 "parser.c" /* yacc.c:358  */
 /* Unqualified %code blocks.  */
-#line 41 "parser.y" /* yacc.c:359  */
+#line 42 "parser.y" /* yacc.c:359  */
 
 	char *token_names[] = {"Identificador", "Constante", "programa", "variables", "codigo", "fin", "definir", "leer", "escribir", "asignacion", "abrir parentesis", "cerrar parentesis", "punto y coma", "coma", "comentario", "sumar", "restar", "multiplicar", "dividir", "error constante", "error identificador", "error desc", "fin de texto"};
 
-#line 175 "parser.c" /* yacc.c:359  */
+#line 176 "parser.c" /* yacc.c:359  */
 
 #ifdef short
 # undef short
@@ -471,8 +472,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    46,    46,    48,    50,    52,    53,    54,    56,    57,
-      59,    60,    62,    63,    64,    66,    67,    69,    70,    72,
+       0,    47,    47,    49,    51,    53,    54,    55,    57,    58,
+      60,    61,    63,    64,    65,    67,    68,    70,    71,    72,
       73,    74,    76,    77,    78,    80,    81,    82,    84,    84
 };
 #endif
@@ -1277,13 +1278,73 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 46 "parser.y" /* yacc.c:1646  */
+#line 47 "parser.y" /* yacc.c:1646  */
     { if (yynerrs || nerrlex) YYABORT;}
-#line 1283 "parser.c" /* yacc.c:1646  */
+#line 1284 "parser.c" /* yacc.c:1646  */
+    break;
+
+  case 5:
+#line 53 "parser.y" /* yacc.c:1646  */
+    { printf("Definir variable: %s\n", yylval.str); }
+#line 1290 "parser.c" /* yacc.c:1646  */
+    break;
+
+  case 6:
+#line 54 "parser.y" /* yacc.c:1646  */
+    { printf("Definir variable: %s\n", yylval.str); }
+#line 1296 "parser.c" /* yacc.c:1646  */
+    break;
+
+  case 12:
+#line 63 "parser.y" /* yacc.c:1646  */
+    { printf("Leer\n"); }
+#line 1302 "parser.c" /* yacc.c:1646  */
+    break;
+
+  case 13:
+#line 64 "parser.y" /* yacc.c:1646  */
+    { printf("Escribir\n"); }
+#line 1308 "parser.c" /* yacc.c:1646  */
+    break;
+
+  case 14:
+#line 65 "parser.y" /* yacc.c:1646  */
+    { printf("Asignacion\n"); }
+#line 1314 "parser.c" /* yacc.c:1646  */
+    break;
+
+  case 20:
+#line 73 "parser.y" /* yacc.c:1646  */
+    { printf("Sumar\n"); }
+#line 1320 "parser.c" /* yacc.c:1646  */
+    break;
+
+  case 21:
+#line 74 "parser.y" /* yacc.c:1646  */
+    { printf("Restar\n"); }
+#line 1326 "parser.c" /* yacc.c:1646  */
+    break;
+
+  case 23:
+#line 77 "parser.y" /* yacc.c:1646  */
+    { printf("Mulltiplicar\n"); }
+#line 1332 "parser.c" /* yacc.c:1646  */
+    break;
+
+  case 24:
+#line 78 "parser.y" /* yacc.c:1646  */
+    { printf("Dividir\n"); }
+#line 1338 "parser.c" /* yacc.c:1646  */
+    break;
+
+  case 27:
+#line 82 "parser.y" /* yacc.c:1646  */
+    { printf("Inversion\n"); }
+#line 1344 "parser.c" /* yacc.c:1646  */
     break;
 
 
-#line 1287 "parser.c" /* yacc.c:1646  */
+#line 1348 "parser.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

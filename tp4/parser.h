@@ -76,7 +76,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 12 "parser.y" /* yacc.c:1909  */
+#line 13 "parser.y" /* yacc.c:1909  */
 
 	int    num;
 	char   *str;
@@ -98,7 +98,8 @@ int yyparse (void);
 
 	void yyerror(const char *s);
 	extern int nerrlex;
+	extern int yynerrs;
 
-#line 103 "parser.h" /* yacc.c:1909  */
+#line 104 "parser.h" /* yacc.c:1909  */
 
 #endif /* !YY_YY_PARSER_H_INCLUDED  */

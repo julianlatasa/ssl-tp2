@@ -19,18 +19,21 @@ int nerrlex = 0;
 int main() {
   switch(yyparse()){
     case 0:
-      puts("Pertenece al LIC");
+      puts("Compilacion Exitosa");
       break;
     case 1:
-      puts("No pertenece al LIC");
-      break;
+      printf("Errores sintacticos: %d, errores semanticos: %d\n", yynerrs, nerrlex); 
+      puts("Error de Compilacion\n");
+     break;
     case 2:
       puts("Memoria insuficiente");
       break;
   }
+ 
 }
 
 /* Informa la ocurrencia de un error. */
 void yyerror(const char *s){
   printf("línea #%d: %s\n", yylineno, s);
+  return;
 }

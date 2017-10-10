@@ -42,7 +42,7 @@ escribir								    	 												return RWORD_ESCRIBIR;
 "*"							             													return OPER_MULT;
 "/"							              												return OPER_DIV;
 
-{letter}+({letter}|{number})*													return IDENTIFICADOR;
+{letter}+({letter}|{number})*													{yylval.str = strdup(yytext); return IDENTIFICADOR;}
 {number}+ 	            															return CONSTANTE;
 
 [[:space:]]+																					;

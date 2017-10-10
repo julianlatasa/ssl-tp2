@@ -934,7 +934,7 @@ return OPER_DIV;
 case 17:
 YY_RULE_SETUP
 #line 45 "scanner.l"
-return IDENTIFICADOR;
+{yylval.str = strdup(yytext); return IDENTIFICADOR;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
