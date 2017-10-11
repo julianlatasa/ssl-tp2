@@ -1285,13 +1285,13 @@ yyreduce:
 
   case 5:
 #line 53 "parser.y" /* yacc.c:1646  */
-    { printf("Definir variable: %s\n", yylval.str); }
+    { printf("Definir variable: %s\n", (yyvsp[-2].str)); }
 #line 1290 "parser.c" /* yacc.c:1646  */
     break;
 
   case 6:
 #line 54 "parser.y" /* yacc.c:1646  */
-    { printf("Definir variable: %s\n", yylval.str); }
+    { printf("Definir variable: %s\n", (yyvsp[-3].str)); }
 #line 1296 "parser.c" /* yacc.c:1646  */
     break;
 
