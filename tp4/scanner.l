@@ -42,8 +42,8 @@ escribir								    	 												return RWORD_ESCRIBIR;
 "*"							             													return OPER_MULT;
 "/"							              												return OPER_DIV;
 
-{letter}+({letter}|{number})*													{yylval.str = strdup(yytext); return IDENTIFICADOR;}
-{number}+ 	            															return CONSTANTE;
+{letter}+({letter}|{number})*													{yylval.str = strdup(yytext);  return IDENTIFICADOR;}
+{number}+ 	            															{sscanf(yytext, "%d", &yylval.num); return CONSTANTE;}
 
 [[:space:]]+																					;
 "//".* 																								;

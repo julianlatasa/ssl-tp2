@@ -50,12 +50,12 @@ programa : RWORD_PROGRAMA sector_definicion_variables codigo RWORD_FIN
 
 sector_definicion_variables : RWORD_VARIABLES definicion_variables
 
-definicion_variables : RWORD_DEFINIR IDENTIFICADOR PUNTCHAR_PUNTOCOMA { printf("Definir variable: %s\n", $<str>1); }
-			     | RWORD_DEFINIR IDENTIFICADOR PUNTCHAR_PUNTOCOMA definicion_variables { printf("Definir variable: %s\n", $<str>1); }
-					 | error
+definicion_variables : RWORD_DEFINIR IDENTIFICADOR PUNTCHAR_PUNTOCOMA { printf("Definir variable: %s\n", $<str>2); }
+			     | RWORD_DEFINIR IDENTIFICADOR PUNTCHAR_PUNTOCOMA definicion_variables { printf("Definir variable: %s\n", $<str>2); }
+					 | error PUNTCHAR_PUNTOCOMA
 
 codigo : RWORD_CODIGO conjunto_sentencias
-			 | error
+			 | error  PUNTCHAR_PUNTOCOMA
 
 conjunto_sentencias : sentencia PUNTCHAR_PUNTOCOMA
 										| sentencia PUNTCHAR_PUNTOCOMA conjunto_sentencias
