@@ -39,10 +39,6 @@
 %token FDT
 %define parse.error verbose
 
-%code {
-	char *token_names[] = {"Identificador", "Constante", "programa", "variables", "codigo", "fin", "definir", "leer", "escribir", "asignacion", "abrir parentesis", "cerrar parentesis", "punto y coma", "coma", "comentario", "sumar", "restar", "multiplicar", "dividir", "error constante", "error identificador", "error desc", "fin de texto"};
-}
-
 %% /*** Reglas BNF ***/
 todo	: programa { if (yynerrs || nerrlex) YYABORT;}
 
