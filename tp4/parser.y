@@ -28,15 +28,10 @@
 %token PUNTCHAR_PDER
 %token PUNTCHAR_PUNTOCOMA
 %token PUNTCHAR_COMA
-%token PUNTCHAR_COMENT
 %token OPER_MAS
 %token OPER_MENOS
 %token OPER_MULT
 %token OPER_DIV
-%token ERROR_CONST
-%token ERROR_IDENT
-%token ERROR_DESC
-%token FDT
 %define parse.error verbose
 
 %% /*** Reglas BNF ***/
@@ -65,6 +60,7 @@ lista_identificadores : IDENTIFICADOR
 
 lista_expresiones : expresion
 		  | expresion PUNTCHAR_COMA lista_expresiones
+
 expresion : termino
 	  | expresion OPER_MAS termino { printf("suma\n"); }
 	  | expresion OPER_MENOS termino { printf("resta\n"); }
