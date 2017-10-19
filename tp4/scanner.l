@@ -33,14 +33,14 @@ leer    																							return RWORD_LEER;
 escribir								    	 												return RWORD_ESCRIBIR;
 
 :=								      															return ASIGNSYM;
-")"  																									return PUNTCHAR_PDER;
-"("  																									return PUNTCHAR_PIZQ;
-;  																										return PUNTCHAR_PUNTOCOMA;
-,  																										return PUNTCHAR_COMA;
-"+"							              												return OPER_MAS;
--								              												return OPER_MENOS;
-"*"							             													return OPER_MULT;
-"/"							              												return OPER_DIV;
+")"  																									return ')';
+"("  																									return '(';
+;  																										return ';';
+,  																										return ',';
+"+"							              												return '+';
+-								              												return '-';
+"*"							             													return '*';
+"/"							              												return '/';
 
 {letter}+({letter}|{number})*													{yylval = strdup(yytext);  return IDENTIFICADOR;}
 {number}+ 	            															{sscanf(yytext, "%s", yylval); return CONSTANTE;}
