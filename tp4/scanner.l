@@ -42,13 +42,13 @@ escribir								    	 												return RWORD_ESCRIBIR;
 "*"							             													return OPER_MULT;
 "/"							              												return OPER_DIV;
 
-{letter}+({letter}|{number})*													{yylval.str = strdup(yytext);  return IDENTIFICADOR;}
-{number}+ 	            															{sscanf(yytext, "%d", &yylval.num); return CONSTANTE;}
+{letter}+({letter}|{number})*													{yylval = strdup(yytext);  return IDENTIFICADOR;}
+{number}+ 	            															{sscanf(yytext, "%s", yylval); return CONSTANTE;}
 
 [[:space:]]+																					;
 "//".* 																								;
 
-{number}+{letter}																			{nerrlex++; yyerror("Error Lexico, Constante con sufijo invalido: ");}
+{number}+{letter}+({letter}|{number})*								{nerrlex++; yyerror("Error Lexico, Constante con sufijo invalido: ");}
 {letter}+({letter}|{number}|{caracter_invalido})*			{nerrlex++; yyerror("Error léxico: identificador inválido: ");}
 {caracter_invalido}+																	{nerrlex++; yyerror("Error léxico: cadena desconocida: ");}
 .																											{nerrlex++; yyerror("Error léxico: caracter desconocido: ");}
