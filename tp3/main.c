@@ -27,15 +27,7 @@ char *token_names[] = {
   "Identificador",
   "Constante",
   "Asignación",
-  "\'(\'", // Paréntesis izquierdo
-  "\')\'", // Paréntesis derecho
-  "\';\'", // Punto y coma
-  "\',\'", // Coma
   "Comentario",
-  "\'+\'", // Más
-  "\'-\'", // Menos
-  "\'*\'", // Por
-  "\'/\'", // Dividir
 };
 
 int main() {
@@ -48,7 +40,10 @@ int main() {
         printf("Token: %s\t\tLexema: %s\n", token_names[t], yytext);
         break;
       default:
-        printf("Token: %s\n", token_names[t]);
+        if (t < sizeof(token_names)/sizeof(token_names[0]))
+          printf("Token: %s\n", token_names[t]); // Palabras Reservadas
+        else
+          printf("Token: \'%c\'\n", t); // Puntuación
         break;
     }
 	}
