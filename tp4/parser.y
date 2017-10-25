@@ -15,8 +15,6 @@
 %token ASIGNSYM
 %left '+' '-'
 %left '*' '/'
-%token '(' ')'
-%left ',' ';'
 
 
 %define parse.error verbose
