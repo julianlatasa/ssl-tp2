@@ -20,7 +20,7 @@ letter [a-zA-Z]
 /* Números */
 number [0-9]
 
-caracter_invalido [[:punct:]]{-}[;=()/*+,-]
+caracter_invalido [[:punct:]]{-}[:;=()/*+,-]
 
 /*** Reglas ***/
 %%
