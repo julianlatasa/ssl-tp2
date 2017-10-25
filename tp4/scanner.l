@@ -3,6 +3,7 @@
 	#include <stdio.h>
 	#include <strings.h>
 	#include "parser.h"
+	char* msgerror(const char * msg, const char * yytext);
 %}
 
 /* Esto determina las opciones de flex */
@@ -44,33 +45,16 @@ escribir						return RWORD_ESCRIBIR;
 {number}+ 	            				{ yylval = strdup(yytext); return CONSTANTE; }
 [[:space:]]+						;
 "//".* 							;
-{number}+{letter}+({letter}|{number})*			{
-								nerrlex++;
-								char msg_basico[] = "Error Lexico, Constante con sufijo invalido";
-								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext) + 1);
-								sprintf(msg, "%s: %s", msg_basico, yytext);
-								yyerror(msg);
-							}
-{letter}+({letter}|{number}|{caracter_invalido})*	{
-								nerrlex++;
-								char msg_basico[] = "Error léxico: identificador inválido";
-								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext) + 1);
-								sprintf(msg, "%s: %s", msg_basico, yytext);
-								yyerror(msg);
-							}
-{caracter_invalido}+					{
-								nerrlex++;
-								char msg_basico[] = "Error léxico: cadena desconocida";
-								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext) + 1);
-								sprintf(msg, "%s: %s", msg_basico, yytext);
-								yyerror(msg);
-							}
-.							{
-								nerrlex++;
-								char msg_basico[] = "Error léxico: caracter desconocido";
-								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext) + 1);
-								sprintf(msg, "%s: %s", msg_basico, yytext);
-								yyerror(msg);
-							}
+{number}+{letter}+({letter}|{number})*			{ yyerror(msgerror("Error Lexico, Constante con sufijo invalido", yytext)); } // FREE
+{letter}+({letter}|{number}|{caracter_invalido})*	{ yyerror(msgerror("Error léxico: identificador inválido", yytext)); }
+{caracter_invalido}+					{ yyerror(msgerror("Error léxico: cadena desconocida", yytext)); }
+.							{  yyerror(msgerror("Error léxico: caracter desconocido", yytext)); }
 
 %%
+
+char* msgerror(const char * msg, const char * yytext){
+	nerrlex++;
+  char *returnmsg =  malloc(strlen(msg) + strlen(yytext) + 3);
+	sprintf(returnmsg, "%s: %s", msg, yytext);
+  return returnmsg;
+}
