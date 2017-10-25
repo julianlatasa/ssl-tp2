@@ -40,35 +40,35 @@ escribir						return RWORD_ESCRIBIR;
 -							return '-';
 "*"							return '*';
 "/"							return '/';
-{letter}+({letter}|{number})*				{ yylval = strdup(yytext);  return IDENTIFICADOR; }
-{number}+ 	            				{ sscanf(yytext, "%s", yylval); return CONSTANTE; }
+{letter}+({letter}|{number})*				{ yylval = strdup(yytext); return IDENTIFICADOR; }
+{number}+ 	            				{ yylval = strdup(yytext); return CONSTANTE; }
 [[:space:]]+						;
 "//".* 							;
 {number}+{letter}+({letter}|{number})*			{
 								nerrlex++;
 								char msg_basico[] = "Error Lexico, Constante con sufijo invalido";
-								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext));
+								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext) + 1);
 								sprintf(msg, "%s: %s", msg_basico, yytext);
 								yyerror(msg);
 							}
 {letter}+({letter}|{number}|{caracter_invalido})*	{
 								nerrlex++;
 								char msg_basico[] = "Error léxico: identificador inválido";
-								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext));
+								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext) + 1);
 								sprintf(msg, "%s: %s", msg_basico, yytext);
 								yyerror(msg);
 							}
 {caracter_invalido}+					{
 								nerrlex++;
 								char msg_basico[] = "Error léxico: cadena desconocida";
-								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext));
+								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext) + 1);
 								sprintf(msg, "%s: %s", msg_basico, yytext);
 								yyerror(msg);
 							}
 .							{
 								nerrlex++;
 								char msg_basico[] = "Error léxico: caracter desconocido";
-								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext));
+								char *msg; msg = malloc(strlen(msg_basico) + strlen(yytext) + 1);
 								sprintf(msg, "%s: %s", msg_basico, yytext);
 								yyerror(msg);
 							}
