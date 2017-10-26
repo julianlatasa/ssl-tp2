@@ -15,6 +15,7 @@
 %token ASIGNSYM
 %left '+' '-'
 %left '*' '/'
+%left MENOS_UNARIO
 
 
 %define parse.error verbose
@@ -55,7 +56,7 @@ expresion : IDENTIFICADOR | CONSTANTE
 		| expresion '*' expresion { printf("multiplicación\n"); }
 		| expresion '/' expresion { printf("división\n"); }
     |	'(' expresion ')' { printf("paréntesis\n"); }
-    | '-' expresion { printf("inversión\n"); }
+    | '-' expresion %prec MENOS_UNARIO { printf("inversión\n"); }
 
 
 %%
