@@ -3,7 +3,7 @@
 	#include <stdio.h>
 	#include <strings.h>
 	#include "parser.h"
-	char* msgerror(const char * msg, const char * yytext);
+	void msgerror(const char * msg, const char * yytext);
 %}
 
 /* Esto determina las opciones de flex */
@@ -45,16 +45,17 @@ escribir						return RWORD_ESCRIBIR;
 {number}+ 	            				{ yylval = strdup(yytext); return CONSTANTE; }
 [[:space:]]+						;
 "//".* 							;
-{number}+{letter}+({letter}|{number})*			{ yyerror(msgerror("Error Lexico, Constante con sufijo invalido", yytext)); } // FREE
-{letter}+({letter}|{number}|{caracter_invalido})*	{ yyerror(msgerror("Error léxico: identificador inválido", yytext)); }
-{caracter_invalido}+					{ yyerror(msgerror("Error léxico: cadena desconocida", yytext)); }
-.							{  yyerror(msgerror("Error léxico: caracter desconocido", yytext)); }
+{number}+{letter}+({letter}|{number})*			{ msgerror("Error Lexico, Constante con sufijo invalido", yytext); }
+{letter}+({letter}|{number}|{caracter_invalido})*	{ msgerror("Error léxico: identificador inválido", yytext); }
+{caracter_invalido}+					{ msgerror("Error léxico: cadena desconocida", yytext); }
+.							{ msgerror("Error léxico: caracter desconocido", yytext); }
 
 %%
 
-char* msgerror(const char * msg, const char * yytext){
+void msgerror(const char * msg, const char * yytext){
 	nerrlex++;
-  char *returnmsg =  malloc(strlen(msg) + strlen(yytext) + 3);
-	sprintf(returnmsg, "%s: %s", msg, yytext);
-  return returnmsg;
+	char *errormsg =  malloc(strlen(msg) + strlen(yytext) + 3);
+	sprintf(errormsg, "%s: %s", msg, yytext);
+	yyerror(errormsg);
+	free(errormsg);
 }
