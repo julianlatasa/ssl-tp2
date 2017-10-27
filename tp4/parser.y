@@ -15,7 +15,7 @@
 %token ASIGNSYM
 %left '+' '-'
 %left '*' '/'
-%left MENOS_UNARIO
+%precedence MENOS_UNARIO
 
 
 %define parse.error verbose
