@@ -1,10 +1,14 @@
-definir total
-definir var1
-definir var2
-definir var2
+Load rtlib,
+Declare total,Integer
+Declare var1,Integer
+Declare var2,Integer
+línea #6: Error semántico: identificador var2 ya declarado
 línea #7: Error léxico: cadena desconocida: ##@
 línea #8: syntax error, unexpected CODIGO, expecting ID
+línea #10: syntax error, unexpected ID, expecting CODIGO or DEFINIR
 línea #10: Error léxico: constante con sufijo inválido: 32z
 línea #11: Error léxico: identificador inválido: var2#2@1
-Errores de compilación
-Errors sintácticos: 1 - Errores léxicos: 3
+línea #11: syntax error, unexpected :=, expecting CODIGO or DEFINIR
+línea #11: Error léxico: constante con sufijo inválido: 4z2m
+línea #12: syntax error, unexpected ESCRIBIR, expecting CODIGO or DEFINIR
+línea #13: syntax error, unexpected FIN, expecting CODIGO or DEFINIR

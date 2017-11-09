@@ -1,18 +1,18 @@
-definir total
-definir var1
-definir var2
-definir var2
+Load rtlib,
+Declare total,Integer
+Declare var1,Integer
+Declare var2,Integer
+línea #6: Error semántico: identificador var2 ya declarado
 línea #7: Error léxico: cadena desconocida: ##@
 línea #7: syntax error, unexpected ';', expecting ID
-leer
+Read var1,Integer
+Read var2,Integer
 línea #10: Error léxico: constante con sufijo inválido: 32z
-inversión
-multiplicación
-suma
-asignación
+línea #10: Error semántico: identificador var5 NO declarado
 línea #11: Error léxico: identificador inválido: var2#2@1
-línea #11: syntax error, unexpected :=, expecting FIN or LEER or ESCRIBIR or ID
-división
-escribir
-Errores de compilación
-Errors sintácticos: 2 - Errores léxicos: 3
+línea #11: syntax error, unexpected :=, expecting FIN or LEER or ESCRIBIR or
+ID
+Declare Temp#1,Integer
+DIV total,2,Temp#1
+Write Temp#1,Integer
+Stop ,
