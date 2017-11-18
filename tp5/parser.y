@@ -52,10 +52,10 @@ lista_expresiones : expresion
 		  | expresion ',' lista_expresiones
 
 expresion : IDENTIFICADOR | CONSTANTE
-	  | expresion '+' expresion { printf("suma\n"); }
-	  | expresion '-' expresion { printf("resta\n"); }
-		| expresion '*' expresion { $$ = do_operation("MULT", $$, $3); } //printf("MULT %s, %s\n", $$, $3); $$ = $1;}
-		| expresion '/' expresion { printf("división\n"); }
+	  | expresion '+' expresion { $$ = do_operation("SUM", $1, $3); }//printf("suma\n"); }
+	  | expresion '-' expresion { $$ = do_operation("SUBS", $1, $3); } //printf("resta\n"); }
+		| expresion '*' expresion { $$ = do_operation("MULT", $1, $3); } //printf("MULT %s, %s\n", $$, $3); $$ = $1;}
+		| expresion '/' expresion { $$ = do_operation("DIV", $1, $3); } //printf("división\n"); }
     |	'(' expresion ')' { printf("paréntesis\n"); }
     | '-' expresion %prec MENOS_UNARIO { printf("Declar\nINV %s\n", $2); $$ = $2;}
 
