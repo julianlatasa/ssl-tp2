@@ -46,13 +46,14 @@ sentencia : RWORD_LEER '(' lista_identificadores ')' ';'
 	  | IDENTIFICADOR ASIGNSYM expresion ';' { printf("asignación\n"); }
 		| error  ';'
 
-lista_identificadores : IDENTIFICADOR { printf("Read %s, Integer\n", $1); }
-		      | IDENTIFICADOR ',' lista_identificadores { printf("Read %s, Integer\n", $1); }
+lista_identificadores : IDENTIFICADOR { do_read($1); } //printf("Read %s, Integer\n", $1);
+		      | IDENTIFICADOR ',' lista_identificadores { do_read($1); }
 
 lista_expresiones : expresion
 		  | expresion ',' lista_expresiones
 
-expresion : IDENTIFICADOR | CONSTANTE
+expresion : IDENTIFICADOR { do_read($1); }
+	  | CONSTANTE
 	  | expresion '+' expresion { printf("suma\n"); }
 	  | expresion '-' expresion { printf("resta\n"); }
 		| expresion '*' expresion { $$ = do_operation("MULT", $$, $3); } //printf("MULT %s, %s\n", $$, $3); $$ = $1;}

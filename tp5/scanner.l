@@ -45,17 +45,17 @@ escribir						return RWORD_ESCRIBIR;
 {number}+ 	            				{ yylval = strdup(yytext); return CONSTANTE; }
 [[:space:]]+						;
 "//".* 							;
-{number}+{letter}+({letter}|{number})*			{ msgerror("Error Lexico, Constante con sufijo invalido", yytext); }
-{letter}+({letter}|{number}|{caracter_invalido})*	{ msgerror("Error léxico: identificador inválido", yytext); }
-{caracter_invalido}+					{ msgerror("Error léxico: cadena desconocida", yytext); }
-.							{ msgerror("Error léxico: caracter desconocido", yytext); }
+{number}+{letter}+({letter}|{number})*			{ msgerror("Error Lexico, Constante con sufijo invalido: %s", yytext); }
+{letter}+({letter}|{number}|{caracter_invalido})*	{ msgerror("Error léxico: identificador inválido: %s", yytext); }
+{caracter_invalido}+					{ msgerror("Error léxico: cadena desconocida: %s", yytext); }
+.							{ msgerror("Error léxico: caracter desconocido :%s", yytext); }
 
 %%
 
 void msgerror(const char * msg, const char * yytext){
 	nerrlex++;
-	char *errormsg =  malloc(strlen(msg) + strlen(yytext) + 3);
-	sprintf(errormsg, "%s: %s", msg, yytext);
+	char *errormsg;
+	asprintf(&errormsg, msg, yytext);
 	yyerror(errormsg);
 	free(errormsg);
 }

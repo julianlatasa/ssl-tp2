@@ -14,6 +14,7 @@
 #include <strings.h>
 #include "parser.h"
 #include "scanner.h"
+#include "semantic.h"
 
 int nerrlex = 0;
 int main() {
@@ -29,7 +30,7 @@ int main() {
       break;
   }
 
-  printf("Errores sintácticos: %d - Errores léxicos: %d\n", yynerrs, nerrlex);
+  printf("Errores sintácticos: %d - Errores léxicos: %d - Errores semanticos: %d\n", yynerrs, nerrlex, semantic_error());
 
 }
 
