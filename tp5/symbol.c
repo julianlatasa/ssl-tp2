@@ -33,8 +33,9 @@ int add_dict(const char *nombre) {
 int exist(const char *nombre) {
 	int i = 0;
 	while (dict[i] != 0) {
-		if (strcmp(dict[i],nombre) == 0)
+		if (strcmp(dict[i],nombre) == 0) {
 			return 1;
+		}
 		i++;
 	}
 	return 0;
