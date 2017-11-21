@@ -2,6 +2,7 @@
 %code top{
 	#include <stdio.h>
 	#include "semantic.h"
+	#include "symbol.h"
 	#include "scanner.h"
 }
 %code provides {
@@ -32,7 +33,7 @@ sector_definicion_variables : RWORD_VARIABLES definicion_variables
 definicion_variables : definicion_variables definicion
 					 | definicion
 
-definicion : RWORD_DEFINIR IDENTIFICADOR ';' { printf("Declare %s,Integer\n", $2); }
+definicion : RWORD_DEFINIR IDENTIFICADOR ';' {  add_dict($2);} //printf("Declare %s,Integer\n", $2);
 					 | error ';'
 
 codigo : RWORD_CODIGO conjunto_sentencias
